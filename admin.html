@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Johnrick Auto Supply</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span style="color:#ff0000;">JOHNRICK</span> AUTO SUPPLY - Admin
+    </a>
+    <a href="index.html" class="btn btn-sm btn-outline-light">Back to Store</a>
+  </div>
+</nav>
+
+<div class="container my-5">
+  
+  <!-- Tabs Navigation -->
+  <ul class="nav nav-tabs mb-4" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="tab" href="#products">Products</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#categories">Categories</a>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    
+    <!-- PRODUCTS TAB -->
+    <div id="products" class="tab-pane fade show active">
+      <h2>Product Management</h2>
+      
+      <!-- Add Product Form -->
+      <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+          <h5>Add New Product</h5>
+        </div>
+        <div class="card-body">
+          <form id="productForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="pname" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Price</label>
+                <input type="number" class="form-control" id="pprice" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" id="pstock" required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <label class="form-label">Image URL</label>
+                <input type="text" class="form-control" id="pimage" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="pcategory" required>
+                  <option value="">Select Category</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-danger">Add Product</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Products List -->
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h5>Current Products</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductList"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES TAB -->
+    <div id="categories" class="tab-pane fade">
+      <h2>Category Management</h2>
+      
+      <!-- Add Category Form -->
+      <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+          <h5>Add New Category</h5>
+        </div>
+        <div class="card-body">
+          <form id="categoryForm">
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <label class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="catname" placeholder="e.g., Engine Parts, Tires, Accessories" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">&nbsp;</label>
+                <button type="submit" class="btn btn-danger w-100">Add Category</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Categories List -->
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h5>Current Categories</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Category Name</th>
+                <th>Product Count</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminCategoryList"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Edit Product</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editProductForm">
+          <input type="hidden" id="editProductId">
+          <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="editPname" required>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" id="editPprice" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Stock</label>
+              <input type="number" class="form-control" id="editPstock" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="editPcategory" required>
+              <option value="">Select Category</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="editPimage" required>
+          </div>
+          <button type="submit" class="btn btn-danger">Update Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js.js"></script>
+</body>
+</html>
